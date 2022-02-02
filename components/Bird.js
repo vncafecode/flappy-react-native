@@ -11,7 +11,7 @@ const Bird = ({ birdBottom, birdLeft }) => {
       width: birdWidth,
       height: birdHeight,
       bottom: birdBottom,
-      birdLeft: birdLeft - (birdWidth / 2)
+      left: birdLeft - (birdWidth / 2)
     }}/>
   )
 }

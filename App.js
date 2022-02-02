@@ -65,22 +65,28 @@ export default function App() {
     }
   }, [obstaclesLeft2]);
 
-  // // check for collisions
-  // useEffect(() => {
-  //   if (
-  //     (
-  //       (
-  //         birdBottom < (obstaclesHeight + obstaclesNegHeight + 30) ||
-  //         birdBottom > (obstaclesHeight + obstaclesNegHeight + gap - 30)) &&
-  //         (obstaclesLeft > screenWidth / 2 - 30 && obstaclesLeft < screenWidth / 2 + 30)
-  //       )
-  //     ||
-  //     ((birdBottom < (obstaclesHeight + obstaclesNegHeight2 + 30) || birdBottom > (obstaclesHeight + obstaclesNegHeight2 + gap - 30)) &&
-  //       (obstaclesLeft2 > screenWidth / 2 - 30 && obstaclesLeft2 < screenWidth / 2 + 30))
-  //   ) {
-  //     gameOver();
-  //   }
-  // });
+  // check for collisions
+  useEffect(() => {
+    if (
+      isHitVertically(obstaclesNegHeight) && isHitHorizontally(obstaclesLeft)
+      ||
+      isHitVertically(obstaclesNegHeight2) && isHitHorizontally(obstaclesLeft2)
+    ) {
+      gameOver();
+    }
+  });
+
+  const isHitVertically = negHeight => {
+    return (
+      birdBottom < (obstaclesHeight + negHeight)
+      ||
+      (birdBottom + 60) > (obstaclesHeight + negHeight + gap)
+    );
+  }
+
+  const isHitHorizontally = obstaclesLeft => {
+    return obstaclesLeft > screenWidth / 2 - 30 && obstaclesLeft < screenWidth / 2 + 30;
+  }
 
   const gameOver = () => {
     console.log('game over');
